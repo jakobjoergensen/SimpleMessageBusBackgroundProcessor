@@ -1,0 +1,10 @@
+@HostAddress = https://localhost:7041
+
+# Post User
+POST {{HostAddress}}/Users/Register
+Content-Type: application/json
+
+{
+  "userName": "John Doe",
+  "email": "john@example.com"
+}
