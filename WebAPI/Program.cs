@@ -6,37 +6,41 @@ using Users.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register the message bus
-int workerCount = 10;
-builder.Services.AddMessageBusModule(workerCount);
+// Modules
+var mediatRAssemblies = new List<Assembly>();
+builder.Services.AddEventBus(mediatRAssemblies);
+builder.Services.AddUsersModule(mediatRAssemblies);
 
 // Add MediatR
-var mediatRAssemblies = new List<Assembly>();
-builder.Services.AddUsersModule(mediatRAssemblies);
 builder.Services.AddMediatR(configuration =>
 {
-	configuration.RegisterServicesFromAssemblies(mediatRAssemblies.ToArray());
+    configuration.RegisterServicesFromAssemblies(mediatRAssemblies.ToArray());
 });
 
 var app = builder.Build();
 
-
 app.UseHttpsRedirection();
 
 
-app.MapPost("/Users/Register", async (
+app.MapPost("User", async (
 	[FromServices] IEventBus eventBus,
-	[FromServices] ILogger<Program> logger,
-	[FromBody] User user) =>
+	[FromServices] ILogger<Program> logger) =>
 {
 	// Do something with the user data ...
-	logger.LogInformation("Registration recieved. UserName: '{username}', Email: '{email}'", user.UserName, user.Email);
+	logger.LogInformation("User submitted.");
 
 	// Publish event
-	var userRegisteredEvent = new UserRegisteredEvent(user.UserName, user.Email);
+	var userRegisteredEvent = new UserSubmittedEvent();
 	await eventBus.Publish(userRegisteredEvent);
 
-	return Results.Ok();
+	return Results.Ok("EventId: " + userRegisteredEvent.Id);
+});
+
+
+app.MapPut("Cancel/{eventId}", async ([FromServices] IEventBus eventBus, Guid eventId) =>
+{
+	await eventBus.Publish(new CancellationEvent(eventId));
+	return Results.Ok(eventId + " stopped.");
 });
 
 app.Run();

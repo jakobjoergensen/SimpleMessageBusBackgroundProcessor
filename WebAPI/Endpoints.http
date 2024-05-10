@@ -1,10 +1,11 @@
 @HostAddress = https://localhost:7041
 
 # Post User
-POST {{HostAddress}}/Users/Register
+POST {{HostAddress}}/Users
 Content-Type: application/json
 
-{
-  "userName": "John Doe",
-  "email": "john@example.com"
-}
+
+# Cancel event
+@eventId = "bc3dee0f-6bb9-4be5-8819-20ac9c503fd2"
+POST {{HostAddress}}/Cancel/{eventId}
+Content-Type: application/json
