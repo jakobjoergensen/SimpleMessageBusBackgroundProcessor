@@ -1,5 +1,4 @@
 using MessageBus;
-using MessageBus.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using Users;

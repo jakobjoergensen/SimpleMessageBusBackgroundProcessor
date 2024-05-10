@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBus", "MessageBus\MessageBus.csproj", "{4D5DE2A1-D6D4-4AE5-871C-2A58F63FEB1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBus", "MessageBus\MessageBus.csproj", "{4D5DE2A1-D6D4-4AE5-871C-2A58F63FEB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBus.Contracts", "MessageBus.Contracts\MessageBus.Contracts.csproj", "{8C625CEC-7AE0-4C6B-8C3F-9EB4E939EC7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{90605C67-6021-48F7-BF19-656D94E2FD19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{90605C67-6021-48F7-BF19-656D94E2FD19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Users", "Users\Users.csproj", "{CF37D826-0301-4646-8A49-0FEE7FC27B1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users", "Users\Users.csproj", "{CF37D826-0301-4646-8A49-0FEE7FC27B1A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.Contracts", "Users.Contracts\Users.Contracts.csproj", "{A2DA2AB8-D74C-4B76-AFF8-52F778BFF770}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Users.Contracts", "Users.Contracts\Users.Contracts.csproj", "{A2DA2AB8-D74C-4B76-AFF8-52F778BFF770}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{4D5DE2A1-D6D4-4AE5-871C-2A58F63FEB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D5DE2A1-D6D4-4AE5-871C-2A58F63FEB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D5DE2A1-D6D4-4AE5-871C-2A58F63FEB1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C625CEC-7AE0-4C6B-8C3F-9EB4E939EC7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C625CEC-7AE0-4C6B-8C3F-9EB4E939EC7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C625CEC-7AE0-4C6B-8C3F-9EB4E939EC7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C625CEC-7AE0-4C6B-8C3F-9EB4E939EC7A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90605C67-6021-48F7-BF19-656D94E2FD19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90605C67-6021-48F7-BF19-656D94E2FD19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90605C67-6021-48F7-BF19-656D94E2FD19}.Release|Any CPU.ActiveCfg = Release|Any CPU

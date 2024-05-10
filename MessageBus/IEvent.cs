@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace MessageBus.Contracts;
+namespace MessageBus;
 
 public interface IEvent : INotification
 {
-	Guid Id { get; init; }
+    Guid Id { get; init; }
 }

@@ -1,5 +1,4 @@
-﻿using MessageBus.Contracts;
-using System.Threading.Channels;
+﻿using System.Threading.Channels;
 
 namespace MessageBus;
 

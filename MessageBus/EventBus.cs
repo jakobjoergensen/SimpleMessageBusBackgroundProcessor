@@ -1,6 +1,4 @@
-﻿using MessageBus.Contracts;
-
-namespace MessageBus;
+﻿namespace MessageBus;
 
 internal sealed class EventBus : IEventBus
 {
