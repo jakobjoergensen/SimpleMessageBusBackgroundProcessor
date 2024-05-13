@@ -11,7 +11,7 @@ internal class EventProcessor : BackgroundService, IEventProcessor
 	private readonly InMemoryMessageQueue _queue;
 	private readonly IServiceScopeFactory _serviceScopeFactory;
 	private readonly ILogger<EventProcessor> _logger;
-	private Dictionary<Guid, (Task Task, CancellationTokenSource CancellationTokenSource)>  _taskDictionary = new();
+	private Dictionary<Guid, (Task Task, CancellationTokenSource CancellationTokenSource)>  _cancelTaskDictionary = new();
 
 	public EventProcessor(InMemoryMessageQueue queue, IServiceScopeFactory serviceScopeFactory, ILogger<EventProcessor> logger)
     {
@@ -55,24 +55,24 @@ internal class EventProcessor : BackgroundService, IEventProcessor
 				}
 			}, localCancellationTokenSource.Token);
 
-			_taskDictionary[@event.Id] = (task, localCancellationTokenSource);
+			_cancelTaskDictionary[@event.CancellationId] = (task, localCancellationTokenSource);
 
             // Remove task from dictionary when completed
 
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            task.ContinueWith(t => _taskDictionary.Remove(@event.Id));
+            task.ContinueWith(t => _cancelTaskDictionary.Remove(@event.CancellationId));
 #pragma warning restore CS4014
 
         }
 	}
 
-	public void CancelTask(Guid eventId)
+	public void CancelTask(Guid cancellationId)
 	{
-		if (_taskDictionary.TryGetValue(eventId, out var task))
+		if (_cancelTaskDictionary.TryGetValue(cancellationId, out var task))
 		{
 			task.CancellationTokenSource.Cancel();
 			task.CancellationTokenSource.Dispose();
-			_taskDictionary.Remove(eventId);
+			_cancelTaskDictionary.Remove(cancellationId);
 		}
 	}
 }
