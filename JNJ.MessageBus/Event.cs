@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace MessageBus;
+namespace JNJ.MessageBus;
 
 public abstract record Event : INotification
 {

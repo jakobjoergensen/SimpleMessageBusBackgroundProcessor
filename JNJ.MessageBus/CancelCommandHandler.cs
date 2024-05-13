@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace MessageBus;
+namespace JNJ.MessageBus;
 
 internal class CancelCommandHandler : IRequestHandler<CancelCommand>
 {

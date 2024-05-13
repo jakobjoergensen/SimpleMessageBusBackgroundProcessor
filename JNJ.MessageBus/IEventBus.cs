@@ -1,4 +1,4 @@
-﻿namespace MessageBus;
+﻿namespace JNJ.MessageBus;
 
 public interface IEventBus
 {

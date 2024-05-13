@@ -1,5 +1,5 @@
-﻿using MediatR;
-using MessageBus;
+﻿using JNJ.MessageBus;
+using MediatR;
 using WebAPI.Events;
 
 namespace WebAPI.Consumers;

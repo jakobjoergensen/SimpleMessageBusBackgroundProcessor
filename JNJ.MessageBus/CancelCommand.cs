@@ -1,5 +1,5 @@
 ﻿using MediatR;
 
-namespace MessageBus;
+namespace JNJ.MessageBus;
 
 public record CancelCommand(Guid CancellationTargetId) : IRequest;

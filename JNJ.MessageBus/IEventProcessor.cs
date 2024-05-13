@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace MessageBus;
+namespace JNJ.MessageBus;
 
 internal interface IEventProcessor : IHostedService
 {

@@ -1,6 +1,6 @@
+using JNJ.MessageBus;
 using MediatR;
 using MediatR.NotificationPublishers;
-using MessageBus;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Events;
 

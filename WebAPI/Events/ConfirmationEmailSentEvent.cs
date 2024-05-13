@@ -1,4 +1,4 @@
-﻿using MessageBus;
+﻿using JNJ.MessageBus;
 
 namespace WebAPI.Events;
 
