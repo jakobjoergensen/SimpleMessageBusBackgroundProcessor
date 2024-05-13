@@ -2,7 +2,7 @@
 
 namespace MessageBus;
 
-public interface IEventProcessor : IHostedService
+internal interface IEventProcessor : IHostedService
 {
     void CancelTask(Guid eventId);
 }

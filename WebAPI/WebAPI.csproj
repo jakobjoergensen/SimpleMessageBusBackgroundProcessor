@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MessageBus\MessageBus.csproj" />
-    <ProjectReference Include="..\Users\Users.csproj" />
   </ItemGroup>
 
 </Project>

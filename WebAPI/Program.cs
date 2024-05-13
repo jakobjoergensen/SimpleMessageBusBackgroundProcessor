@@ -1,48 +1,44 @@
+using MediatR;
 using MediatR.NotificationPublishers;
 using MessageBus;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
-using Users;
-using Users.Events;
+using WebAPI.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Modules
-var mediatRAssemblies = new List<Assembly>();
-builder.Services.AddEventBus(mediatRAssemblies);
-builder.Services.AddUsersModule(mediatRAssemblies);
+builder.Services.AddEventBus();
 
 // Add MediatR
 builder.Services.AddMediatR(configuration =>
 {
-    configuration.RegisterServicesFromAssemblies(mediatRAssemblies.ToArray());
+	configuration.RegisterServicesFromAssembly(typeof(Program).Assembly);
 	configuration.NotificationPublisher = new TaskWhenAllPublisher();
 });
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
 
+app.UseHttpsRedirection();
 
 app.MapPost("User", async (
 	[FromServices] IEventBus eventBus,
-	[FromServices] ILogger<Program> logger) =>
+	[FromBody] User user) =>
 {
-	// Do something with the user data ...
-	logger.LogInformation("User submitted.");
-
-	// Publish event
-	var userRegisteredEvent = new UserSubmittedEvent();
+	var userRegisteredEvent = new UserSubmittedEvent(user);
 	await eventBus.Publish(userRegisteredEvent);
 
-	return Results.Ok("EventId: " + userRegisteredEvent.Id);
+	return Results.Ok(new
+	{
+		EventId = userRegisteredEvent.Id,
+        userRegisteredEvent.CancellationId
+	});
 });
 
 
-app.MapPut("Cancel/{eventId}", async ([FromServices] IEventBus eventBus, Guid eventId) =>
+app.MapPut("Cancel/{cancellationId}", async ([FromServices] IMediator mediator, Guid cancellationId) =>
 {
-	await eventBus.Publish(new CancellationEvent(eventId));
-	return Results.Ok(eventId + " stopped.");
+	await mediator.Send(new CancelCommand(cancellationId));
+	return Results.Ok();
 });
 
 app.Run();

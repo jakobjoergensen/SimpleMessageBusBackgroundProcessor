@@ -6,5 +6,5 @@ POST {{HostAddress}}/User
 ###
 
 # Cancel event
-@eventId = "bc3dee0f-6bb9-4be5-8819-20ac9c503fd2"
-PUT {{HostAddress}}/Cancel/{eventId}
+@cancellationId = "bc3dee0f-6bb9-4be5-8819-20ac9c503fd2"
+PUT {{HostAddress}}/Cancel/{cancellationId}

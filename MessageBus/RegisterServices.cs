@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Reflection;
 
 namespace MessageBus;
 
 public static class RegisterServices
 {
-    public static IServiceCollection AddEventBus(this IServiceCollection services, List<Assembly> mediatrAssemblies)
+    public static IServiceCollection AddEventBus(this IServiceCollection services)
     {
         services.AddSingleton<InMemoryMessageQueue>();
         services.AddSingleton<IEventBus, EventBus>();
@@ -15,7 +15,7 @@ public static class RegisterServices
         services.AddSingleton<IHostedService>(provider => provider.GetRequiredService<EventProcessor>());
         services.AddSingleton<IEventProcessor>(provider => provider.GetRequiredService<EventProcessor>());
 
-        mediatrAssemblies.Add(typeof(RegisterServices).Assembly);
+        services.AddTransient<IRequestHandler<CancelCommand>, CancelCommandHandler>();
 
         return services;
     }

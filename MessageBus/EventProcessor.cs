@@ -41,7 +41,7 @@ internal class EventProcessor : BackgroundService, IEventProcessor
 				}
 				catch (OperationCanceledException)
 				{
-					_logger.LogInformation("Operation was canceled. Event {eventId}", @event.Id);
+					_logger.LogInformation("Operation was canceled. Event {eventId} CancellationId {cancellationId}", @event.Id, @event.CancellationId);
 					throw; // Ensure the task is marked as canceled
 				}
 				catch (Exception ex)
