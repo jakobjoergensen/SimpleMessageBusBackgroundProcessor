@@ -9,7 +9,7 @@ internal sealed class EventBus : IEventBus
 		_queue = queue;
 	}
 
-    public async Task Publish<T>(T message, CancellationToken cancellationToken) where T : class, IEvent
+    public async Task Publish<T>(T message, CancellationToken cancellationToken) where T : Event
 	{
 		await _queue.Writer.WriteAsync(message, cancellationToken);
 	}

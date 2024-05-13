@@ -4,7 +4,7 @@ namespace MessageBus;
 
 internal sealed class InMemoryMessageQueue
 {
-	private readonly Channel<IEvent> _channel = Channel.CreateUnbounded<IEvent>();
-	public ChannelReader<IEvent> Reader => _channel.Reader;
-	public ChannelWriter<IEvent> Writer => _channel.Writer;
+	private readonly Channel<Event> _channel = Channel.CreateUnbounded<Event>();
+	public ChannelReader<Event> Reader => _channel.Reader;
+	public ChannelWriter<Event> Writer => _channel.Writer;
 }

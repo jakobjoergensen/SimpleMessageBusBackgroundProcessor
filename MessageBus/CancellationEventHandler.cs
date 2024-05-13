@@ -13,7 +13,7 @@ internal class CancellationEventHandler : INotificationHandler<CancellationEvent
 
     public Task Handle(CancellationEvent notification, CancellationToken cancellationToken)
     {
-        _eventProcessor.CancelTask(notification.ToBeCanceledEventId);
+        _eventProcessor.CancelTask(notification.CancellationTargetId);
         return Task.CompletedTask;
     }
 }

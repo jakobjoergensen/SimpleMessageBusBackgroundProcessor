@@ -22,7 +22,7 @@ internal class EventProcessor : BackgroundService, IEventProcessor
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{
-		await foreach (IEvent @event in _queue.Reader.ReadAllAsync(stoppingToken))
+		await foreach (Event @event in _queue.Reader.ReadAllAsync(stoppingToken))
 		{
 			var localCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken);
 			var task = Task.Run(async () =>

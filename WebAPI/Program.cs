@@ -1,3 +1,4 @@
+using MediatR.NotificationPublishers;
 using MessageBus;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
@@ -15,6 +16,7 @@ builder.Services.AddUsersModule(mediatRAssemblies);
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(mediatRAssemblies.ToArray());
+	configuration.NotificationPublisher = new TaskWhenAllPublisher();
 });
 
 var app = builder.Build();
