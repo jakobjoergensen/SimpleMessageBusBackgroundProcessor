@@ -2,11 +2,11 @@
 
 namespace MessageBus;
 
-internal class CancellationEventHandler : INotificationHandler<CancellationEvent>
+internal class CancellationEventConsumer : INotificationHandler<CancellationEvent>
 {
     private readonly IEventProcessor _eventProcessor;
 
-    public CancellationEventHandler(IEventProcessor eventProcessor)
+    public CancellationEventConsumer(IEventProcessor eventProcessor)
     {
         _eventProcessor = eventProcessor;
     }

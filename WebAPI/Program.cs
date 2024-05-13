@@ -3,7 +3,7 @@ using MessageBus;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using Users;
-using Users.Contracts;
+using Users.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 

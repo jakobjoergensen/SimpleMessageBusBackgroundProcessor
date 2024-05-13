@@ -1,5 +1,5 @@
 ﻿using MessageBus;
 
-namespace Users.Contracts;
+namespace Users.Events;
 
 public record UserSubmittedEvent : Event;

@@ -1,8 +1,9 @@
 ﻿using MediatR;
 using MessageBus;
 using Microsoft.Extensions.Logging;
+using Users.Events;
 
-namespace Users;
+namespace Users.Consumers;
 
 internal class UserRegisteredConsumer : INotificationHandler<UserRegisteredEvent>
 {

@@ -1,5 +1,5 @@
 ﻿using MessageBus;
 
-namespace Users;
+namespace Users.Events;
 
 internal record ConfirmationEmailSentEvent : Event;

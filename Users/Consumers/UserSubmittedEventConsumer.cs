@@ -1,23 +1,23 @@
 ﻿using MediatR;
 using MessageBus;
 using Microsoft.Extensions.Logging;
-using Users.Contracts;
+using Users.Events;
 
-namespace Users;
+namespace Users.Consumers;
 
 internal class UserSubmittedEventConsumer : INotificationHandler<UserSubmittedEvent>
 {
-	private readonly ILogger<UserSubmittedEventConsumer> _logger;
+    private readonly ILogger<UserSubmittedEventConsumer> _logger;
     private readonly IEventBus _eventBus;
 
     public UserSubmittedEventConsumer(ILogger<UserSubmittedEventConsumer> logger, IEventBus eventBus)
     {
-		_logger = logger;
+        _logger = logger;
         _eventBus = eventBus;
     }
 
     public async Task Handle(UserSubmittedEvent notification, CancellationToken cancellationToken)
-	{
+    {
         _logger.LogInformation("Handling {eventId} {handlerName}'", notification.Id, nameof(UserSubmittedEventConsumer));
 
         // Some delay to simulate processing
@@ -27,8 +27,8 @@ internal class UserSubmittedEventConsumer : INotificationHandler<UserSubmittedEv
 
 
         var username = "John Doe";
-		var useremail = "john@example.com";
+        var useremail = "john@example.com";
 
-		await _eventBus.Publish(new UserRegisteredEvent(username, useremail));
-	}
+        await _eventBus.Publish(new UserRegisteredEvent(username, useremail));
+    }
 }
