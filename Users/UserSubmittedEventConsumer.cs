@@ -5,12 +5,12 @@ using Users.Contracts;
 
 namespace Users;
 
-internal class UserSubmittedEventHandler : INotificationHandler<UserSubmittedEvent>
+internal class UserSubmittedEventConsumer : INotificationHandler<UserSubmittedEvent>
 {
-	private readonly ILogger<UserSubmittedEventHandler> _logger;
+	private readonly ILogger<UserSubmittedEventConsumer> _logger;
     private readonly IEventBus _eventBus;
 
-    public UserSubmittedEventHandler(ILogger<UserSubmittedEventHandler> logger, IEventBus eventBus)
+    public UserSubmittedEventConsumer(ILogger<UserSubmittedEventConsumer> logger, IEventBus eventBus)
     {
 		_logger = logger;
         _eventBus = eventBus;
@@ -18,12 +18,12 @@ internal class UserSubmittedEventHandler : INotificationHandler<UserSubmittedEve
 
     public async Task Handle(UserSubmittedEvent notification, CancellationToken cancellationToken)
 	{
-        _logger.LogInformation("Handling {eventId} {handlerName}'", notification.Id, nameof(UserSubmittedEventHandler));
+        _logger.LogInformation("Handling {eventId} {handlerName}'", notification.Id, nameof(UserSubmittedEventConsumer));
 
         // Some delay to simulate processing
         await Task.Delay(4000, cancellationToken);
 
-        _logger.LogInformation("Handled: {eventId} {handlerName}'", notification.Id, nameof(UserSubmittedEventHandler));
+        _logger.LogInformation("Handled: {eventId} {handlerName}'", notification.Id, nameof(UserSubmittedEventConsumer));
 
 
         var username = "John Doe";
