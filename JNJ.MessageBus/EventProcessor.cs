@@ -68,11 +68,15 @@ internal class EventProcessor : BackgroundService, IEventProcessor
 #pragma warning disable CS4014 // Disable warning: "Because this call is not awaited, execution of the current method continues before the call is completed".
             task.ContinueWith(t => {
 
-                if (!_cancelTaskDictionary.Remove(@event.CancellationId, out (Task Task, CancellationTokenSource CancellationTokenSource) value))
+                if (!_cancelTaskDictionary.TryRemove(@event.CancellationId, out var value))
                 {
-                    _logger.LogWarning("CancellationId {CancellationId} could not be found in the dictionary.", @event.CancellationId);
+                    value.CancellationTokenSource.Dispose();
                 }
-            });
+                else
+                {
+                    _logger.LogWarning("CancellationId {CancellationId} was not found in the dictionary, might have been completed and removed already.", @event.CancellationId);
+                }
+            }, TaskScheduler.Default);
 #pragma warning restore CS4014
         }
     }
@@ -80,15 +84,16 @@ internal class EventProcessor : BackgroundService, IEventProcessor
 
     public void CancelTask(Guid cancellationId)
     {
-        if (_cancelTaskDictionary.TryGetValue(cancellationId, out var task))
+        if (_cancelTaskDictionary.TryRemove(cancellationId, out var task))
         {
             task.CancellationTokenSource.Cancel();
             task.CancellationTokenSource.Dispose();
-
-            if (!_cancelTaskDictionary.Remove(cancellationId, out (Task Task, CancellationTokenSource CancellationTokenSource) value))
-            {
-                _logger.LogWarning("CancellationId {CancellationId} could not be found in the dictionary.", cancellationId);
-            }
         }
+        else
+        {
+            _logger.LogWarning("CancellationId {CancellationId} was not found in the dictionary, might have been completed and removed already.", cancellationId);
+        }
+            
+
     }
 }
