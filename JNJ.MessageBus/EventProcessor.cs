@@ -68,7 +68,7 @@ internal class EventProcessor : BackgroundService, IEventProcessor
 #pragma warning disable CS4014 // Disable warning: "Because this call is not awaited, execution of the current method continues before the call is completed".
             task.ContinueWith(t => {
 
-                if (!_cancelTaskDictionary.TryRemove(@event.CancellationId, out var value))
+                if (_cancelTaskDictionary.TryRemove(@event.CancellationId, out var value))
                 {
                     value.CancellationTokenSource.Dispose();
                 }
@@ -84,10 +84,9 @@ internal class EventProcessor : BackgroundService, IEventProcessor
 
     public void CancelTask(Guid cancellationId)
     {
-        if (_cancelTaskDictionary.TryRemove(cancellationId, out var task))
+        if (_cancelTaskDictionary.TryGetValue(cancellationId, out var task))
         {
             task.CancellationTokenSource.Cancel();
-            task.CancellationTokenSource.Dispose();
         }
         else
         {
