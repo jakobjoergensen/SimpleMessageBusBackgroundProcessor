@@ -5,4 +5,4 @@ Remember to update the project file with new version number. Then:
 
 ### Push package to local package store
 
-	dotnet nuget push ./bin/Release/JJ.MessageBus.{VersionNumber}.nupkg -s LocalNuget
+	dotnet nuget push ./bin/Release/JNJ.MessageBus.{VersionNumber}.nupkg -s LocalNuget
